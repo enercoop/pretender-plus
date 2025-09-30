@@ -19,6 +19,8 @@ Works with any authentication system - [Devise](https://github.com/plataformatec
 ## Pretendest
 
 Pretendest is a friendly fork of [Pretender](https://github.com/ankane/pretender), with a handful of extra features:
+- An `#impersonating_user?` helper,
+- An option to impersonate a resource by another resource (e.g. a Client impersonated by an Employee).
 
 If you don't need those features, the original Pretender gem is perfectly fine.
 Otherwise, `pretendest` is a drop-in replacement for `pretender`.
@@ -166,14 +168,28 @@ impersonates :account,
              with: ->(id) { EnterpriseAccount.find_by(id: id) }
 ```
 
-This creates four methods:
+This creates five methods:
 
 ```ruby
 true_account
 impersonate_account
 stop_impersonating_account
 impersonating_account? # Pretender Plus addition
+account_impersonator   # Pretender Plus addition
 ```
+
+### Impersonating from another role (Pretender Plus addition)
+
+You can impersonate a role from another role. Consider for instance when Employees are allowed to impersonate Clients:
+
+```ruby
+impersonates :client,
+             impersonator: :employee
+```
+
+In that case, when impersonating:
+- `true_client` returns `nil` (because there is no "true" client),
+- `client_impersonator` returns the `current_employee`. 
 
 ## History
 

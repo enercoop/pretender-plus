@@ -15,6 +15,8 @@ module Pretendest
         primary_key = klass.respond_to?(:primary_key) ? klass.primary_key : :id
         klass.find_by(primary_key => id)
       }
+      impersonator = opts[:impersonator] || scope
+      impersonator_method = opts[:impersonator_method] || :"current_#{impersonator}"
       true_method = :"true_#{scope}"
       session_key = :"impersonated_#{scope}_id"
       impersonated_var = :"@impersonated_#{scope}"
@@ -42,7 +44,7 @@ module Pretendest
           # if a user logs out without session being destroyed
           # or stop_impersonating_user being called,
           # we can stop the impersonation
-          if send(true_method)
+          if send(impersonator_method)
             impersonated_resource = impersonate_with.call(request.session[session_key])
             instance_variable_set(impersonated_var, impersonated_resource) if impersonated_resource
           else
@@ -55,9 +57,14 @@ module Pretendest
         impersonated_resource || send(true_method)
       end
 
+      define_method :"#{scope}_impersonator" do
+        send(impersonator_method)
+      end
+      helper_method("#{scope}_impersonator") if respond_to?(:helper_method)
+
       define_method :"impersonate_#{scope}" do |resource|
         raise ArgumentError, "No resource to impersonate" unless resource
-        raise Pretendest::Error, "Must be logged in to impersonate" unless send(true_method)
+        raise Pretendest::Error, "Must be logged in to impersonate" unless send(impersonator_method)
 
         instance_variable_set(impersonated_var, resource)
         # use to_s for Mongoid for BSON::ObjectId
