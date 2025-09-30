@@ -1,6 +1,6 @@
 require_relative "test_helper"
 
-class PretenderTest < ActionDispatch::IntegrationTest
+class PretendestTest < ActionDispatch::IntegrationTest
   def setup
     User.delete_all
   end

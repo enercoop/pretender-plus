@@ -2,9 +2,9 @@
 require "active_support"
 
 # modules
-require_relative "pretender/version"
+require_relative "pretendest/version"
 
-module Pretender
+module Pretendest
   class Error < StandardError; end
 
   module Methods
@@ -27,7 +27,7 @@ module Pretender
         sc = superclass
         define_method true_method do
           # TODO handle private methods
-          raise Pretender::Error, "#{impersonated_method} must be defined before the impersonates method" unless sc.method_defined?(impersonated_method)
+          raise Pretendest::Error, "#{impersonated_method} must be defined before the impersonates method" unless sc.method_defined?(impersonated_method)
           sc.instance_method(impersonated_method).bind(self).call
         end
       end
@@ -47,7 +47,7 @@ module Pretender
             instance_variable_set(impersonated_var, impersonated_resource) if impersonated_resource
           else
             # TODO better message
-            warn "[pretender] Stopping impersonation due to safety check"
+            warn "[pretendest] Stopping impersonation due to safety check"
             send(stop_impersonating_method)
           end
         end
@@ -57,7 +57,7 @@ module Pretender
 
       define_method :"impersonate_#{scope}" do |resource|
         raise ArgumentError, "No resource to impersonate" unless resource
-        raise Pretender::Error, "Must be logged in to impersonate" unless send(true_method)
+        raise Pretendest::Error, "Must be logged in to impersonate" unless send(true_method)
 
         instance_variable_set(impersonated_var, resource)
         # use to_s for Mongoid for BSON::ObjectId
@@ -73,8 +73,8 @@ module Pretender
 end
 
 ActiveSupport.on_load(:action_controller) do
-  extend Pretender::Methods
+  extend Pretendest::Methods
 end
 
 # ActiveSupport.on_load(:action_cable) runs too late with Unicorn
-ActionCable::Connection::Base.extend(Pretender::Methods) if defined?(ActionCable)
+ActionCable::Connection::Base.extend(Pretendest::Methods) if defined?(ActionCable)

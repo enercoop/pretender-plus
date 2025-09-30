@@ -14,14 +14,21 @@ Works with any authentication system - [Devise](https://github.com/plataformatec
 
 :tangerine: Battle-tested at [Instacart](https://www.instacart.com/opensource)
 
-[![Build Status](https://github.com/ankane/pretender/actions/workflows/build.yml/badge.svg)](https://github.com/ankane/pretender/actions)
+[![Build Status](https://github.com/enercoop/pretendest/actions/workflows/build.yml/badge.svg)](https://github.com/enercoop/pretendest/actions)
+
+## Pretendest
+
+Pretendest is a friendly fork of [Pretender](https://github.com/ankane/pretender), with a handful of extra features.
+
+If you don't need those features, the original Pretender gem is perfectly fine.
+Otherwise, `pretendest` is a drop-in replacement for `pretender`.
 
 ## Installation
 
 Add this line to your application’s Gemfile:
 
 ```ruby
-gem "pretender"
+gem "pretendest"
 ```
 
 And add this to your `ApplicationController`:
@@ -143,7 +150,7 @@ The `current_user` method now returns the impersonated user in channels.
 
 ## Configuration
 
-Pretender is super flexible. You can change the names of methods and even impersonate multiple roles at the same time. Here’s the default configuration.
+Pretendest is super flexible. You can change the names of methods and even impersonate multiple roles at the same time. Here’s the default configuration.
 
 ```ruby
 impersonates :user,
@@ -169,22 +176,22 @@ stop_impersonating_account
 
 ## History
 
-View the [changelog](https://github.com/ankane/pretender/blob/master/CHANGELOG.md)
+View the [changelog](https://github.com/enercoop/pretendest/blob/master/CHANGELOG.md)
 
 ## Contributing
 
 Everyone is encouraged to help improve this project. Here are a few ways you can help:
 
-- [Report bugs](https://github.com/ankane/pretender/issues)
-- Fix bugs and [submit pull requests](https://github.com/ankane/pretender/pulls)
+- [Report bugs](https://github.com/enercoop/pretendest/issues)
+- Fix bugs and [submit pull requests](https://github.com/enercoop/pretendest/pulls)
 - Write, clarify, or fix documentation
 - Suggest or add new features
 
 To get started with development:
 
 ```sh
-git clone https://github.com/ankane/pretender.git
-cd pretender
+git clone https://github.com/enercoop/pretendest.git
+cd pretendest
 bundle install
 bundle exec rake test
 ```
