@@ -18,7 +18,7 @@ Works with any authentication system - [Devise](https://github.com/plataformatec
 
 ## Pretender Plus
 
-`pretender-plus` is a friendly fork of Pretender, with a handful of extra features.
+`pretender-plus` is a friendly fork of Pretender, with a handful of extra features:
 
 If you don't need those features, the original `pretender` gem is perfectly fine.
 Otherwise, `pretender-plus` is a drop-in replacement for pretender.
@@ -108,7 +108,7 @@ Create an index view
 And show when someone is signed in as another user in your application layout
 
 ```erb
-<% if current_user != true_user %>
+<% if impersonating_user? %>
   You (<%= true_user.name %>) are signed in as <%= current_user.name %>
   <%= button_to "Back to admin", stop_impersonating_users_path, data: {turbo: false} %>
 <% end %>
@@ -166,12 +166,13 @@ impersonates :account,
              with: ->(id) { EnterpriseAccount.find_by(id: id) }
 ```
 
-This creates three methods:
+This creates four methods:
 
 ```ruby
 true_account
 impersonate_account
 stop_impersonating_account
+impersonating_account? # Pretender Plus addition
 ```
 
 ## History
