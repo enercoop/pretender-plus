@@ -68,6 +68,11 @@ module Pretendest
         remove_instance_variable(impersonated_var) if instance_variable_defined?(impersonated_var)
         request.session.delete(session_key)
       end
+
+      define_method "impersonating_#{scope}?" do
+        send(impersonated_method) != send(true_method)
+      end
+      helper_method("impersonating_#{scope}?") if respond_to?(:helper_method)
     end
   end
 end

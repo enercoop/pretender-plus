@@ -14,27 +14,24 @@ class PretendestTest < ActionDispatch::IntegrationTest
 
     assert_equal admin, current_user
     assert_equal admin, true_user
+    refute impersonating_user?
 
     post impersonate_user_url(user.id)
     assert_response :success
 
     assert_equal user, current_user
     assert_equal admin, true_user
+    assert impersonating_user?
 
     post stop_impersonating_users_url
     assert_response :success
 
     assert_equal admin, current_user
     assert_equal admin, true_user
+    refute impersonating_user?
   end
 
   private
 
-  def current_user
-    controller.current_user
-  end
-
-  def true_user
-    controller.true_user
-  end
+  delegate :current_user, :true_user, :impersonating_user?, to: :controller
 end
