@@ -14,14 +14,21 @@ Works with any authentication system - [Devise](https://github.com/plataformatec
 
 :tangerine: Battle-tested at [Instacart](https://www.instacart.com/opensource)
 
-[![Build Status](https://github.com/ankane/pretender/actions/workflows/build.yml/badge.svg)](https://github.com/ankane/pretender/actions)
+[![Build Status](https://github.com/enercoop/pretender-plus/actions/workflows/build.yml/badge.svg)](https://github.com/enercoop/pretender-plus/actions)
+
+## Pretender Plus
+
+`pretender-plus` is a friendly fork of Pretender, with a handful of extra features.
+
+If you don't need those features, the original `pretender` gem is perfectly fine.
+Otherwise, `pretender-plus` is a drop-in replacement for pretender.
 
 ## Installation
 
 Add this line to your application’s Gemfile:
 
 ```ruby
-gem "pretender"
+gem "pretender-plus"
 ```
 
 And add this to your `ApplicationController`:
@@ -169,22 +176,22 @@ stop_impersonating_account
 
 ## History
 
-View the [changelog](https://github.com/ankane/pretender/blob/master/CHANGELOG.md)
+View the [changelog](https://github.com/enercoop/pretender-plus/blob/master/CHANGELOG.md)
 
 ## Contributing
 
 Everyone is encouraged to help improve this project. Here are a few ways you can help:
 
-- [Report bugs](https://github.com/ankane/pretender/issues)
-- Fix bugs and [submit pull requests](https://github.com/ankane/pretender/pulls)
+- [Report bugs](https://github.com/enercoop/pretender-plus/issues)
+- Fix bugs and [submit pull requests](https://github.com/enercoop/pretender-plus/pulls)
 - Write, clarify, or fix documentation
 - Suggest or add new features
 
 To get started with development:
 
 ```sh
-git clone https://github.com/ankane/pretender.git
-cd pretender
+git clone https://github.com/enercoop/pretender-plus.git
+cd pretender-plus
 bundle install
 bundle exec rake test
 ```

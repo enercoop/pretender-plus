@@ -1,14 +1,14 @@
-require_relative "lib/pretender/version"
+require_relative "lib/pretender-plus/version"
 
 Gem::Specification.new do |spec|
-  spec.name          = "pretender"
-  spec.version       = Pretender::VERSION
+  spec.name          = "pretender-plus"
+  spec.version       = PretenderPlus::VERSION
   spec.summary       = "Log in as another user in Rails"
-  spec.homepage      = "https://github.com/ankane/pretender"
+  spec.homepage      = "https://github.com/enercoop/pretender-plus"
   spec.license       = "MIT"
 
-  spec.author        = "Andrew Kane"
-  spec.email         = "andrew@ankane.org"
+  spec.author        = "Pierre de La Morinerie"
+  spec.email         = "kemenaran@gmail.com"
 
   spec.files         = Dir["*.{md,txt}", "{lib}/**/*"]
   spec.require_path  = "lib"
